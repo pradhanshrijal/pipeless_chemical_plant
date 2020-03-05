@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- launch main drivers -->
+  <include file="$(find pipeless_plant_bringup)/launch/camera.launch" />
+
+  <!-- launching robot bases -->
+  <!-- TODO -->
+
+  <!-- Localization related -->
+  <include file="$(find ceiling_cam_fiducials_odom_ekf)/launch/ceiling_localization.launch" />
+  
+  <!-- navigation related-->
+  <include file="$(find pipeless_plant_navigation)/launch/navigation.launch" />
+  <node name="docking" pkg="pipeless_plant_navigation" type="docking.py" output="screen"/>
+  
+  <!-- PLC node -->
+  <node name="pipeless_plant_plc" pkg="pipeless_plant_plc_controller" type="tcp_plc_server.py" output="screen"/>
+
+
+  <!-- Gui -->
+  <node name="pipeless_plant_app" pkg="pipeless_plant_app" type="pipeless_plant_plugin.py" output="screen"/>
+
+</launch>
